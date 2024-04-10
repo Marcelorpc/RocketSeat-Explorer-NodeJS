@@ -3,9 +3,11 @@ const express = require("express");
 const app = express();
 
 app.get("/message/:id/:name", (request, response) => {
+  const {id, name} = request.params
+
   response.send(`
-    Message ID: ${request.params.id}.
-    User: ${request.params.name}.
+    Message ID: ${id}.
+    User: ${name}.
   `)
 })
 
