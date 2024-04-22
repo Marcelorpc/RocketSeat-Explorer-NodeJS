@@ -1,11 +1,16 @@
 const express = require("express");
 
 const app = express();
+app.use(express.json())
 
 app.post("/users", (request, response) => {
-  const {page, limit} = request.query
+  const {name, email, password} = request.body
 
-  response.send("Voce chamou o post")
+  response.send(`
+    User: ${name}
+    Email: ${email}
+    password: ${password}
+  `)
 })
 
 const PORT = 3333;
