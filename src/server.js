@@ -4,9 +4,13 @@ const AppError = require("./utils/AppError"); //Importa meu modulo de tratar err
 
 const express = require("express"); //importa o express
 
+const database = require("./database/sqlite"); //importa meu database
+
 const app = express(); //inicializa o express
 
 const routes = require("./routes"); //pega o routes do index.js
+
+database(); //inicio meu banco de dados
 
 app.use(express.json()) //Informa ao express que irei receber json no body params
 
