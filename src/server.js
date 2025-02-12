@@ -1,22 +1,21 @@
-require("express-async-errors"); //Importa a dependencia de tratanento de erros
+require("express-async-errors");
 
-const AppError = require("./utils/AppError"); //Importa meu modulo de tratar erros
+const AppError = require("./utils/AppError");
 
-const express = require("express"); //importa o express
+const express = require("express");
 
-const migrationsRun = require("./database/sqlite/migrations"); //importa meu database
+const migrationsRun = require("./database/sqlite/migrations");
 
-const app = express(); //inicializa o express
+const app = express();
 
-const routes = require("./routes"); //pega o routes do index.js
+const routes = require("./routes");
 
-migrationsRun(); //inicio meu banco de dados
+migrationsRun();
 
-app.use(express.json()) //Informa ao express que irei receber json no body params
+app.use(express.json());
 
-app.use(routes); //informa ao express que vou usar o routes que criei
+app.use(routes);
 
-//Tratamento de erros da minha aplicação
 app.use((error, request, response, next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
@@ -33,5 +32,5 @@ app.use((error, request, response, next) => {
   })
 })
 
-const PORT = 3333; //coloca a porta desejada como const para facilitar alteracoes futuras
-app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`)) //Indica para escutar a porta definida e executar uma mensagem
+const PORT = 3333;
+app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
